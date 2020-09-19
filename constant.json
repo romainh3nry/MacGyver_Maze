@@ -1,0 +1,9 @@
+{
+  "sprite_number": 15,
+  "sprite_size": 30,
+  "background_picture": "ressource/background.jpg",
+  "macgyver_picture": "ressource/MacGyver.png",
+  "bad_guy_picture": "ressource/Gardien.png",
+  "wall_picture": "ressource/wall.png",
+  "level_txt": "ressource/level.txt"
+}
