@@ -7,5 +7,13 @@
   "wall_picture": "ressource/wall.png",
   "floor_picture": "ressource/floor.png",
   "flag_picture": "ressource/flag.png",
-  "level_txt": "ressource/level.txt"
+  "level_txt": "ressource/level.txt",
+
+  "needle_picture": "ressource/aiguille.png",
+  "ether_picture": "ressource/ether.png",
+  "syringe_picture" : "ressource/seringue.png",
+  "tube_picture": "ressource/tube_plastique.png",
+
+  "victory_picture": "ressource/victory.png",
+  "victory_background": "ressource/victory_background.jpg"
 }

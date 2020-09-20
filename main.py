@@ -47,3 +47,11 @@ class MainClass:
             self.level.display(window)
             window.blit(hero.icon, (hero.x, hero.y))
             pygame.display.flip()
+
+            if self.level.structure[hero.sprite_y][hero.sprite_x] == 'a':
+                pygame.time.Clock().tick(60)
+                font = pygame.font.Font(None, 24)
+                text = font.render('Victory', 1, (255, 255, 255))
+                window.blit(text, (150, 150))
+                pygame.display.flip()
+
