@@ -5,5 +5,7 @@
   "macgyver_picture": "ressource/MacGyver.png",
   "bad_guy_picture": "ressource/Gardien.png",
   "wall_picture": "ressource/wall.png",
+  "floor_picture": "ressource/floor.png",
+  "flag_picture": "ressource/flag.png",
   "level_txt": "ressource/level.txt"
 }

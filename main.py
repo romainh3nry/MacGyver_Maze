@@ -1,6 +1,8 @@
 from pygame.locals import *
 from level import *
+from character import *
 import json
+import pygame
 
 
 class MainClass:
@@ -23,6 +25,7 @@ class MainClass:
         window.blit(background, (0, 0))
         self.level.generate()
         self.level.display(window)
+        hero = Character(self.constant['macgyver_picture'], self.level)
         pygame.display.flip()
         while self.progress:
             for event in pygame.event.get():
@@ -31,3 +34,16 @@ class MainClass:
                 elif event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         self.progress = False
+                    elif event.key == K_RIGHT:
+                        hero.move('right')
+                    elif event.key == K_LEFT:
+                        hero.move('left')
+                    elif event.key == K_UP:
+                        hero.move('up')
+                    elif event.key == K_DOWN:
+                        hero.move('down')
+
+            window.blit(background, (0, 0))
+            self.level.display(window)
+            window.blit(hero.icon, (hero.x, hero.y))
+            pygame.display.flip()
