@@ -11,6 +11,7 @@ class Character:
         self.sprite_y = 0
         self.x = 0
         self.y = 0
+        self.inventory = 0
 
     @staticmethod
     def load_constant():
@@ -38,3 +39,7 @@ class Character:
                 if self.level.structure[self.sprite_y + 1][self.sprite_x] != 'm':
                     self.sprite_y += 1
                     self.y = self.sprite_y * self.constant['sprite_size']
+
+    def delete_item(self):
+        self.level.structure[self.sprite_y][self.sprite_x] = '0'
+        self.inventory += 1
