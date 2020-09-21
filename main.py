@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 from level import *
 from character import *
+from console_mode import *
 import json
 import time
 
@@ -9,17 +10,37 @@ import time
 class MainClass:
     def __init__(self):
         self.constant = self.load_constant()
-        self.level = Level()
+        self.level = Level(self.constant['level_txt'])
+        self.console_mode = ConsoleMode()
         self.progress = True
         self.window_side = self.constant['sprite_number'] * self.constant['sprite_size']
-        self.play()
+        self.mode_choice = self.playing_mode()
+        if self.mode_choice == 1:
+            self.play_graphic_mode()
+        elif self.mode_choice == 2:
+            self.play_console_mode()
 
     @staticmethod
     def load_constant():
         with open('constant.json') as file:
             return json.load(file)
 
-    def play(self):
+    def playing_mode(self):
+        choice = input('Please choose the mode you want to play: \n1 - Graphic mode\n2 - Console mode\n3 - Quit\n:')
+        try:
+            choice = int(choice)
+            assert 0 < choice < 4
+        except ValueError:
+            print('The choice has to be digit')
+            return self.playing_mode()
+        except AssertionError:
+            print('The choice has to be digit between 1 and 3')
+            return self.playing_mode()
+        if choice == 3:
+            exit()
+        return choice
+
+    def play_graphic_mode(self):
         pygame.init()
         pygame.font.init()
         window = pygame.display.set_mode((self.window_side, self.window_side))
@@ -27,7 +48,9 @@ class MainClass:
         window.blit(background, (0, 0))
         self.level.generate()
         self.level.display(window)
-        hero = Character(self.constant['macgyver_picture'], self.level)
+        hero = Character(
+            pygame.transform.scale(pygame.image.load(self.constant['macgyver_picture']).convert_alpha(), (30, 30)),
+            self.level)
         pygame.display.flip()
         while self.progress:
             font = pygame.font.SysFont('Comic Sans MS', 30)
@@ -77,3 +100,35 @@ class MainClass:
                 pygame.display.flip()
                 time.sleep(3)
                 self.progress = False
+
+    def play_console_mode(self):
+        level = Level(self.constant['level_txt_console'])
+        level.generate()
+        hero = 'X'
+        x_hero, y_hero = self.console_mode.position(level.structure, hero)
+        while self.progress:
+            print('Item : 0')
+            for elt in level.structure:
+                print("".join(elt))
+            direction = input('Choose a direction: ')
+            if direction == 'd':
+                if level.structure[x_hero][y_hero + 1] != 'm':
+                    level.structure[x_hero][y_hero] = '0'
+                    level.structure[x_hero][y_hero + 1] = hero
+                    y_hero += 1
+            elif direction == 'q':
+                if level.structure[x_hero][y_hero - 1] != 'm':
+                    level.structure[x_hero][y_hero] = '0'
+                    level.structure[x_hero][y_hero - 1] = hero
+                    y_hero -= 1
+            elif direction == 's':
+                if level.structure[x_hero + 1][y_hero] != 'm':
+                    level.structure[x_hero][y_hero] = '0'
+                    level.structure[x_hero + 1][y_hero] = hero
+                    x_hero += 1
+            elif direction == 'z':
+                if level.structure[x_hero - 1][y_hero] != 'm':
+                    level.structure[x_hero][y_hero] = '0'
+                    level.structure[x_hero - 1][y_hero] = hero
+                    x_hero -= 1
+

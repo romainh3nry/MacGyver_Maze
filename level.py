@@ -4,9 +4,9 @@ import random
 
 
 class Level:
-    def __init__(self):
+    def __init__(self, file):
         self.constant = self.load_constant()
-        self.file = self.constant['level_txt']
+        self.file = file
         self.structure = []
         self.inventory = 0
 

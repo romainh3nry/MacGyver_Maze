@@ -5,7 +5,7 @@ import pygame
 class Character:
     def __init__(self, icon, level):
         self.constant = self.load_constant()
-        self.icon = pygame.transform.scale(pygame.image.load(icon).convert_alpha(), (30, 30))
+        self.icon = icon
         self.level = level
         self.sprite_x = 0
         self.sprite_y = 0
