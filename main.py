@@ -13,6 +13,8 @@ class MainClass(Constant):
         self.level = Level(self.constant['level_txt'])
         self.console_mode = ConsoleMode()
         self.progress = True
+        self.item_count = 0
+        self.item = ['N', 'E', 'S', 'T']
         self.window_side = self.constant['sprite_number'] * self.constant['sprite_size']
         self.mode_choice = self.playing_mode()
         if self.mode_choice == 1:
@@ -102,7 +104,7 @@ class MainClass(Constant):
         hero = 'X'
         x_hero, y_hero = self.console_mode.position(level.structure, hero)
         while self.progress:
-            print('Item : 0')
+            print('Item : {}'.format(self.item_count))
             for elt in level.structure:
                 print("".join(elt))
             direction = input('Choose a direction: ')
@@ -126,4 +128,15 @@ class MainClass(Constant):
                     level.structure[x_hero][y_hero] = '0'
                     level.structure[x_hero - 1][y_hero] = hero
                     x_hero -= 1
+
+            if level.structure[x_hero][y_hero + 1] == 'b':
+                if self.item_count < 4:
+                    self.progress = False
+                    print('You\'re dead !!')
+                else:
+                    self.progress = False
+                    print('You win... but what did you expect? you\'re Macgyver !')
+
+            elif level.structure[x_hero][y_hero + 1] in self.item or level.structure[x_hero][y_hero - 1] in self.item or level.structure[x_hero + 1][y_hero] in self.item or level.structure[x_hero - 1][y_hero] in self.item:
+                self.item_count += 1
 
