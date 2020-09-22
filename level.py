@@ -4,18 +4,20 @@ from constant import *
 
 
 class Level(Constant):
+    """
+    class users to generation and display items + bad guy
+    """
+
     def __init__(self, file):
         Constant.__init__(self)
         self.file = file
         self.structure = []
         self.inventory = 0
 
-    @staticmethod
-    def load_constant():
-        with open('constant.json') as file:
-            return json.load(file)
-
     def generate(self):
+        """
+        maze generating
+        """
         with open(self.file) as file:
             level_structure = []
             for line in file:
@@ -40,6 +42,9 @@ class Level(Constant):
         self.structure = level_structure
 
     def display(self, window):
+        """
+        maze displaying items and bad guy
+        """
         wall = pygame.transform.scale(pygame.image.load(self.constant['wall_picture']).convert_alpha(), (30, 30))
         floor = pygame.transform.scale(pygame.image.load(self.constant['floor_picture']).convert_alpha(), (30, 30))
         flag = pygame.transform.scale(pygame.image.load(self.constant['flag_picture']).convert_alpha(), (30, 30))

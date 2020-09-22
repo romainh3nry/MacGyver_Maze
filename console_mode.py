@@ -2,11 +2,18 @@ from constant import *
 
 
 class ConsoleMode(Constant):
+    """
+    Console mode setting class
+    """
     def __init__(self):
         Constant.__init__(self)
         self.progress = True
 
-    def position(self, maze, position):
+    @staticmethod
+    def position(maze, position):
+        """
+        function uses to find position of the hero in the maze
+        """
         for index_line, line in enumerate(maze):
             for index_sprite, sprite in enumerate(line):
                 if sprite == position:

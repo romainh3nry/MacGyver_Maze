@@ -1,3 +1,6 @@
+"""
+game progression file
+"""
 import pygame
 from pygame.locals import *
 from level import *
@@ -23,6 +26,9 @@ class MainClass(Constant):
             self.play_console_mode()
 
     def playing_mode(self):
+        """
+        Fonction uses for choosing graphic or console mode
+        """
         choice = input('Please choose the mode you want to play: \n1 - Graphic mode\n2 - Console mode\n3 - Quit\n:')
         try:
             choice = int(choice)
@@ -38,6 +44,9 @@ class MainClass(Constant):
         return choice
 
     def play_graphic_mode(self):
+        """
+        Graphic mode progression function
+        """
         pygame.init()
         pygame.font.init()
         window = pygame.display.set_mode((self.window_side, self.window_side))
@@ -99,6 +108,9 @@ class MainClass(Constant):
                 self.progress = False
 
     def play_console_mode(self):
+        """
+        Console mode progression function
+        """
         level = Level(self.constant['level_txt_console'])
         level.generate()
         hero = 'X'
