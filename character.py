@@ -1,10 +1,9 @@
-import json
-import pygame
+from constant import *
 
 
-class Character:
+class Character(Constant):
     def __init__(self, icon, level):
-        self.constant = self.load_constant()
+        Constant.__init__(self)
         self.icon = icon
         self.level = level
         self.sprite_x = 0
@@ -12,11 +11,6 @@ class Character:
         self.x = 0
         self.y = 0
         self.inventory = 0
-
-    @staticmethod
-    def load_constant():
-        with open('constant.json') as file:
-            return json.load(file)
 
     def move(self, direction):
         if direction == 'right':

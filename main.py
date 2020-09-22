@@ -3,13 +3,13 @@ from pygame.locals import *
 from level import *
 from character import *
 from console_mode import *
-import json
+from constant import *
 import time
 
 
-class MainClass:
+class MainClass(Constant):
     def __init__(self):
-        self.constant = self.load_constant()
+        Constant.__init__(self)
         self.level = Level(self.constant['level_txt'])
         self.console_mode = ConsoleMode()
         self.progress = True
@@ -19,11 +19,6 @@ class MainClass:
             self.play_graphic_mode()
         elif self.mode_choice == 2:
             self.play_console_mode()
-
-    @staticmethod
-    def load_constant():
-        with open('constant.json') as file:
-            return json.load(file)
 
     def playing_mode(self):
         choice = input('Please choose the mode you want to play: \n1 - Graphic mode\n2 - Console mode\n3 - Quit\n:')

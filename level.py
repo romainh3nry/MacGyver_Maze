@@ -1,11 +1,11 @@
 import pygame
-import json
 import random
+from constant import *
 
 
-class Level:
+class Level(Constant):
     def __init__(self, file):
-        self.constant = self.load_constant()
+        Constant.__init__(self)
         self.file = file
         self.structure = []
         self.inventory = 0
