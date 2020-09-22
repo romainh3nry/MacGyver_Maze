@@ -27,7 +27,7 @@ class MainClass(Constant):
 
     def playing_mode(self):
         """
-        Fonction uses for choosing graphic or console mode
+        Fonction used for choosing graphic or console mode
         """
         choice = input('Please choose the mode you want to play: \n1 - Graphic mode\n2 - Console mode\n3 - Quit\n:')
         try:

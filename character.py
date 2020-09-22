@@ -3,7 +3,7 @@ from constant import *
 
 class Character(Constant):
     """
-    class uses for Macgyver's moves and items pick up logic
+    class used for Macgyver's moves and items pick up logic
     """
     def __init__(self, icon, level):
         Constant.__init__(self)

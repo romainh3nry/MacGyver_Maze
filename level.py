@@ -5,7 +5,7 @@ from constant import *
 
 class Level(Constant):
     """
-    class users to generation and display items + bad guy
+    class used to generation and display items + bad guy
     """
 
     def __init__(self, file):
