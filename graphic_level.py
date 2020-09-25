@@ -1,4 +1,5 @@
-from level import *
+import pygame
+from level import Level
 
 
 class GraphicLevel(Level):
@@ -6,18 +7,28 @@ class GraphicLevel(Level):
         Level.__init__(self, file)
         self.file = file
 
+    @staticmethod
+    def resize_set(pic):
+        return pygame.transform.scale(
+            pygame.image.load(pic).convert_alpha(), (31, 31))
+
+    @staticmethod
+    def resize_item(item):
+        return pygame.transform.scale(
+            pygame.image.load(item).convert(), (31, 31))
+
     def display(self, window):
         """
         maze displaying items and bad guy
         """
-        wall = pygame.transform.scale(pygame.image.load(self.constant['wall_picture']).convert_alpha(), (30, 30))
-        floor = pygame.transform.scale(pygame.image.load(self.constant['floor_picture']).convert_alpha(), (30, 30))
-        flag = pygame.transform.scale(pygame.image.load(self.constant['flag_picture']).convert_alpha(), (30, 30))
-        bad_guy = pygame.transform.scale(pygame.image.load(self.constant['bad_guy_picture']).convert_alpha(), (30, 30))
-        needle = pygame.transform.scale(pygame.image.load(self.constant['needle_picture']).convert(), (30, 30))
-        ether = pygame.transform.scale(pygame.image.load(self.constant['ether_picture']).convert(), (30, 30))
-        syringe = pygame.transform.scale(pygame.image.load(self.constant['syringe_picture']).convert(), (30, 30))
-        tube = pygame.transform.scale(pygame.image.load(self.constant['tube_picture']).convert(), (30, 30))
+        wall = self.resize_set(self.constant['wall_picture'])
+        floor = self.resize_set(self.constant['floor_picture'])
+        flag = self.resize_set(self.constant['flag_picture'])
+        bad_guy = self.resize_set(self.constant['bad_guy_picture'])
+        needle = self.resize_item(self.constant['needle_picture'])
+        ether = self.resize_item(self.constant['ether_picture'])
+        syringe = self.resize_item(self.constant['syringe_picture'])
+        tube = self.resize_item(self.constant['tube_picture'])
         line_number = 0
         for line in self.structure:
             sprite_number = 0

@@ -1,5 +1,5 @@
-from console_level import *
-from character import *
+from console_level import ConsoleLevel
+from character import Character, Constant
 
 
 class ConsoleMode(Constant):
@@ -19,16 +19,20 @@ class ConsoleMode(Constant):
                 print("".join(elt))
             direction = input('Choose a direction: ')
             if direction == 'd':
-                if self.hero.console_move(x_hero, y_hero, x_hero, y_hero + 1, self.level, hero):
+                if self.hero.console_move(
+                        x_hero, y_hero, x_hero, y_hero + 1, self.level, hero):
                     y_hero += 1
             elif direction == 'q':
-                if self.hero.console_move(x_hero, y_hero, x_hero, y_hero - 1, self.level, hero):
+                if self.hero.console_move(
+                        x_hero, y_hero, x_hero, y_hero - 1, self.level, hero):
                     y_hero -= 1
             elif direction == 's':
-                if self.hero.console_move(x_hero, y_hero, x_hero + 1, y_hero, self.level, hero):
+                if self.hero.console_move(
+                        x_hero, y_hero, x_hero + 1, y_hero, self.level, hero):
                     x_hero += 1
             elif direction == 'z':
-                if self.hero.console_move(x_hero, y_hero, x_hero - 1, y_hero, self.level, hero):
+                if self.hero.console_move(
+                        x_hero, y_hero, x_hero - 1, y_hero, self.level, hero):
                     x_hero -= 1
 
             if self.level.structure[x_hero][y_hero + 1] == 'b':
@@ -37,4 +41,5 @@ class ConsoleMode(Constant):
                     print('You\'re dead !!')
                 else:
                     self.progress = False
-                    print('You win... but what did you expect? you\'re Macgyver !')
+                    print('You win... but what did you expect? '
+                          'you\'re Macgyver !')

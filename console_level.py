@@ -1,4 +1,4 @@
-from level import *
+from level import Level
 
 
 class ConsoleLevel(Level):

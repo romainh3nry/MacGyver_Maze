@@ -1,5 +1,5 @@
-from console_mode import *
-from graphic_mode import *
+from console_mode import ConsoleMode
+from graphic_mode import GraphicMode
 
 
 class MainClass:
@@ -8,14 +8,14 @@ class MainClass:
         if self.mode_choice == 1:
             GraphicMode().play()
         elif self.mode_choice == 2:
-            self.console_mode = ConsoleMode()
             ConsoleMode().play()
 
     def playing_mode(self):
         """
         Fonction used for choosing graphic or console mode
         """
-        choice = input('Please choose the mode you want to play: \n1 - Graphic mode\n2 - Console mode\n3 - Quit\n:')
+        choice = input('Please choose the mode you want to play: \n1 - '
+                       'Graphic mode\n2 - Console mode\n3 - Quit\n:')
         try:
             choice = int(choice)
             assert 0 < choice < 4
@@ -28,5 +28,3 @@ class MainClass:
         if choice == 3:
             exit()
         return choice
-
-

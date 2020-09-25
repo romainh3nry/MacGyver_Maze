@@ -1,6 +1,5 @@
-import pygame
 import random
-from constant import *
+from constant import Constant
 
 
 class Level(Constant):
@@ -36,4 +35,3 @@ class Level(Constant):
                     level_structure[item_y][item_x] = 'T'
                 self.inventory += 1
         self.structure = level_structure
-

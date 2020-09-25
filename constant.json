@@ -2,8 +2,8 @@
   "sprite_number": 15,
   "sprite_size": 30,
 
-  "background_picture": "ressource/background.jpg",
-  "macgyver_picture": "ressource/MacGyver.png",
+  "background": "ressource/background.jpg",
+  "macgyver": "ressource/MacGyver.png",
   "bad_guy_picture": "ressource/Gardien.png",
   "wall_picture": "ressource/wall.png",
   "floor_picture": "ressource/floor.png",
