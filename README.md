@@ -14,8 +14,13 @@ Vous venez de faire vos premiers pas avec Python et avez averti tous vos amis. B
 - Le programme s'arrête uniquement si MacGyver a bien récupéré tous les objets et trouvé la sortie du labyrinthe. S'il n'a pas tous les objets et qu'il se présente devant le garde, il meurt (la vie est cruelle pour les héros).
 - Le programme sera standalone, c'est-à-dire qu'il pourra être exécuté sur n'importe quel ordinateur.
 
+## Prérequis
+
+Le jeu utilise python 3 et le module pygame
+
 ## Récupération et lancement du jeu
 
 - git clone https://github.com/MagicRom06/MacGyver_Maze
+- Pour activer l'environnement virtuel une fois dans le repertoire, executer la commande pipenv shell
 - exécuter la commande "pip install -r requirements.txt"
 - exécuter python start.py
