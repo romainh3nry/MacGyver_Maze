@@ -10,12 +10,12 @@ class GraphicLevel(Level):
     @staticmethod
     def resize_set(pic):
         return pygame.transform.scale(
-            pygame.image.load(pic).convert_alpha(), (31, 31))
+            pygame.image.load(pic).convert_alpha(), (30, 30))
 
     @staticmethod
     def resize_item(item):
         return pygame.transform.scale(
-            pygame.image.load(item).convert(), (31, 31))
+            pygame.image.load(item).convert(), (30, 30))
 
     def display(self, window):
         """
