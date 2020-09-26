@@ -14,6 +14,9 @@ import time
 
 
 class GraphicMode(Constant):
+    """
+    Main class for graphical mode game
+    """
     def __init__(self):
         Constant.__init__(self)
         self.level = GraphicLevel(self.constant['level_txt'])
@@ -22,6 +25,9 @@ class GraphicMode(Constant):
         self.progress = True
 
     def play(self):
+        """
+        method used to launch graphical game
+        """
         pygame.init()
         pygame.font.init()
         window = pygame.display.set_mode((self.window_side, self.window_side))

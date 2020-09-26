@@ -9,7 +9,7 @@ class ConsoleLevel(Level):
     @staticmethod
     def position(maze, position):
         """
-        function used to find position of the hero in the maze
+        method used to find position in the maze
         """
         for index_line, line in enumerate(maze):
             for index_sprite, sprite in enumerate(line):

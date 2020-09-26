@@ -3,6 +3,9 @@ from character import Character, Constant
 
 
 class ConsoleMode(Constant):
+    """
+    Main class for console mode game
+    """
     def __init__(self):
         Constant.__init__(self)
         self.progress = True
@@ -10,6 +13,9 @@ class ConsoleMode(Constant):
         self.hero = Character('X', self.level)
 
     def play(self):
+        """
+        method used to launch console game
+        """
         self.level.generate()
         hero = 'X'
         x_hero, y_hero = self.level.position(self.level.structure, hero)

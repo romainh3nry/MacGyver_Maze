@@ -3,7 +3,7 @@ from constant import Constant
 
 class Character(Constant):
     """
-    class used for Macgyver's moves and items pick up logic
+    class used for MacGyver's moves and items pick up logic
     """
 
     def __init__(self, icon, level):
@@ -19,6 +19,9 @@ class Character(Constant):
         self.item = ['N', 'E', 'S', 'T']
 
     def ui_move(self, direction):
+        """
+        method used for moving on graphical mode
+        """
         if direction == 'right':
             if self.sprite_x < (self.constant['sprite_number'] - 1):
                 if self.level.structure[
@@ -53,6 +56,9 @@ class Character(Constant):
                     self.y = self.sprite_y * self.constant['sprite_size']
 
     def console_move(self, x_before, y_before, x_new, y_new, level, hero):
+        """
+        method used for moving on console mode
+        """
         if level.structure[x_new][y_new] != 'm':
             if level.structure[x_new][y_new] in self.item:
                 self.item_count += 1
@@ -63,5 +69,8 @@ class Character(Constant):
             return False
 
     def delete_item(self):
+        """
+        method used for items pick up logic
+        """
         self.level.structure[self.sprite_y][self.sprite_x] = '0'
         self.inventory += 1
