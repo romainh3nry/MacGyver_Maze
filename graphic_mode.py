@@ -22,12 +22,12 @@ class GraphicMode(Constant):
         self.level = GraphicLevel(self.constant['level_txt'])
         self.window_side = \
             self.constant['sprite_number'] * self.constant['sprite_size']
-        self.progress = True
 
     def play(self):
         """
         method used to launch graphical game
         """
+        progress = True
         pygame.init()
         pygame.font.init()
         window = pygame.display.set_mode((self.window_side, self.window_side))
@@ -41,16 +41,16 @@ class GraphicMode(Constant):
                 (30, 30)),
             self.level)
         pygame.display.flip()
-        while self.progress:
+        while progress:
             font = pygame.font.SysFont('Comic Sans MS', 30)
             item_collected = font.render(
                 'Items : {}'.format(hero.inventory), False, (255, 255, 255))
             for event in pygame.event.get():
                 if event.type == QUIT:
-                    self.progress = False
+                    progress = False
                 elif event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
-                        self.progress = False
+                        progress = False
                     elif event.key == K_RIGHT:
                         hero.ui_move('right')
                     elif event.key == K_LEFT:
@@ -82,11 +82,11 @@ class GraphicMode(Constant):
                     window.blit(text, (140, 190))
                     pygame.display.flip()
                     time.sleep(3)
-                    self.progress = False
+                    progress = False
             elif self.level.structure[hero.sprite_y][hero.sprite_x] == 'a':
                 window.fill('white')
                 text = font.render('Victory !', False, (50, 205, 50))
                 window.blit(text, (170, 190))
                 pygame.display.flip()
                 time.sleep(3)
-                self.progress = False
+                progress = False

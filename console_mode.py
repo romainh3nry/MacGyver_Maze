@@ -8,7 +8,6 @@ class ConsoleMode(Constant):
     """
     def __init__(self):
         Constant.__init__(self)
-        self.progress = True
         self.level = ConsoleLevel(self.constant['level_txt_console'])
         self.player = Character(self.constant['player'], self.level)
 
@@ -16,10 +15,11 @@ class ConsoleMode(Constant):
         """
         method used to launch console game
         """
+        progress = True
         self.level.generate()
         x_hero, y_hero = self.level.position(
             self.level.structure, self.constant['player'])
-        while self.progress:
+        while progress:
             print('Item : {}'.format(self.player.item_count))
             for elt in self.level.structure:
                 print("".join(elt))
@@ -47,9 +47,9 @@ class ConsoleMode(Constant):
 
             if self.level.structure[x_hero][y_hero + 1] == 'b':
                 if self.player.item_count < 4:
-                    self.progress = False
+                    progress = False
                     print('You\'re dead !!')
                 else:
-                    self.progress = False
+                    progress = False
                     print('You win... but what did you expect? '
                           'you\'re Macgyver !')
