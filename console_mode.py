@@ -10,39 +10,43 @@ class ConsoleMode(Constant):
         Constant.__init__(self)
         self.progress = True
         self.level = ConsoleLevel(self.constant['level_txt_console'])
-        self.hero = Character('X', self.level)
+        self.player = Character(self.constant['player'], self.level)
 
     def play(self):
         """
         method used to launch console game
         """
         self.level.generate()
-        hero = 'X'
-        x_hero, y_hero = self.level.position(self.level.structure, hero)
+        x_hero, y_hero = self.level.position(
+            self.level.structure, self.constant['player'])
         while self.progress:
-            print('Item : {}'.format(self.hero.item_count))
+            print('Item : {}'.format(self.player.item_count))
             for elt in self.level.structure:
                 print("".join(elt))
             direction = input('Choose a direction: ')
             if direction == 'd':
-                if self.hero.console_move(
-                        x_hero, y_hero, x_hero, y_hero + 1, self.level, hero):
+                if self.player.console_move(
+                        x_hero, y_hero, x_hero, y_hero + 1,
+                        self.level, self.constant['player']):
                     y_hero += 1
             elif direction == 'q':
-                if self.hero.console_move(
-                        x_hero, y_hero, x_hero, y_hero - 1, self.level, hero):
+                if self.player.console_move(
+                        x_hero, y_hero, x_hero, y_hero - 1,
+                        self.level, self.constant['player']):
                     y_hero -= 1
             elif direction == 's':
-                if self.hero.console_move(
-                        x_hero, y_hero, x_hero + 1, y_hero, self.level, hero):
+                if self.player.console_move(
+                        x_hero, y_hero, x_hero + 1, y_hero,
+                        self.level, self.constant['player']):
                     x_hero += 1
             elif direction == 'z':
-                if self.hero.console_move(
-                        x_hero, y_hero, x_hero - 1, y_hero, self.level, hero):
+                if self.player.console_move(
+                        x_hero, y_hero, x_hero - 1, y_hero,
+                        self.level, self.constant['player']):
                     x_hero -= 1
 
             if self.level.structure[x_hero][y_hero + 1] == 'b':
-                if self.hero.item_count < 4:
+                if self.player.item_count < 4:
                     self.progress = False
                     print('You\'re dead !!')
                 else:

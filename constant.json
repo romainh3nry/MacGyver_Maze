@@ -1,6 +1,7 @@
 {
   "sprite_number": 15,
   "sprite_size": 30,
+  "player": "X",
 
   "background": "ressource/background.jpg",
   "macgyver": "ressource/MacGyver.png",
