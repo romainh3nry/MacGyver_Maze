@@ -1,4 +1,4 @@
-from graphic_level import GraphicLevel
+from level_ui import GraphicLevel
 from character import Character, Constant
 import pygame
 from pygame.locals import \
@@ -10,18 +10,18 @@ from pygame.locals import \
     K_UP, \
     K_DOWN
 
-import time
-
 
 class GraphicMode(Constant):
     """
     Main class for graphical mode game
     """
+
     def __init__(self):
         Constant.__init__(self)
-        self.level = GraphicLevel(self.constant['level_txt'])
+        self.level = GraphicLevel(self.constant['level'])
         self.window_side = \
             self.constant['sprite_number'] * self.constant['sprite_size']
+        self.player = Character(self.constant['player'], self.level)
 
     def play(self):
         """
@@ -35,16 +35,14 @@ class GraphicMode(Constant):
         window.blit(background, (0, 0))
         self.level.generate()
         self.level.display(window)
-        hero = Character(
-            pygame.transform.scale(
-                pygame.image.load(self.constant['macgyver']).convert_alpha(),
-                (30, 30)),
-            self.level)
+        x_hero, y_hero = self.level.position(self.level.structure, 'X')
         pygame.display.flip()
         while progress:
             font = pygame.font.SysFont('Comic Sans MS', 30)
             item_collected = font.render(
-                'Items : {}'.format(hero.inventory), False, (255, 255, 255))
+                'Items : {}'.format(
+                    self.player.item_count), False, (255, 255, 255))
+
             for event in pygame.event.get():
                 if event.type == QUIT:
                     progress = False
@@ -52,41 +50,35 @@ class GraphicMode(Constant):
                     if event.key == K_ESCAPE:
                         progress = False
                     elif event.key == K_RIGHT:
-                        hero.ui_move('right')
+                        if self.player.move(
+                                x_hero, y_hero, x_hero, y_hero + 1,
+                                self.level, self.constant['player']):
+                            y_hero += 1
                     elif event.key == K_LEFT:
-                        hero.ui_move('left')
+                        if self.player.move(
+                                x_hero, y_hero, x_hero, y_hero - 1,
+                                self.level, self.constant['player']):
+                            y_hero -= 1
                     elif event.key == K_UP:
-                        hero.ui_move('up')
+                        if self.player.move(
+                                x_hero, y_hero, x_hero - 1, y_hero,
+                                self.level, self.constant['player']):
+                            x_hero -= 1
                     elif event.key == K_DOWN:
-                        hero.ui_move('down')
+                        if self.player.move(
+                                x_hero, y_hero, x_hero + 1, y_hero,
+                                self.level, self.constant['player']):
+                            x_hero += 1
 
             window.blit(background, (0, 0))
             self.level.display(window)
-            window.blit(hero.icon, (hero.x, hero.y))
             window.blit(item_collected, (300, 0))
             pygame.display.flip()
 
-            if self.level.structure[hero.sprite_y][hero.sprite_x] == 'N':
-                hero.delete_item()
-            elif self.level.structure[hero.sprite_y][hero.sprite_x] == 'E':
-                hero.delete_item()
-            elif self.level.structure[hero.sprite_y][hero.sprite_x] == 'S':
-                hero.delete_item()
-            elif self.level.structure[hero.sprite_y][hero.sprite_x] == 'T':
-                hero.delete_item()
-            elif self.level.structure[hero.sprite_y][hero.sprite_x] == 'b':
-                if hero.inventory != 4:
-                    window.fill('white')
-                    font = pygame.font.SysFont('Comic Sans MS', 30)
-                    text = font.render('You\'re dead...', False, (178, 34, 34))
-                    window.blit(text, (140, 190))
-                    pygame.display.flip()
-                    time.sleep(3)
+            if self.level.structure[x_hero][y_hero + 1] == 'b':
+                if self.player.item_count < 4:
+                    self.player.has_lose('ui', window)
                     progress = False
-            elif self.level.structure[hero.sprite_y][hero.sprite_x] == 'a':
-                window.fill('white')
-                text = font.render('Victory !', False, (50, 205, 50))
-                window.blit(text, (170, 190))
-                pygame.display.flip()
-                time.sleep(3)
-                progress = False
+                else:
+                    self.player.has_win('ui', window)
+                    progress = False

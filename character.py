@@ -1,4 +1,6 @@
 from constant import Constant
+import pygame
+import time
 
 
 class Character(Constant):
@@ -10,52 +12,10 @@ class Character(Constant):
         Constant.__init__(self)
         self.icon = icon
         self.level = level
-        self.sprite_x = 0
-        self.sprite_y = 0
-        self.x = 0
-        self.y = 0
-        self.inventory = 0
         self.item_count = 0
         self.item = ['N', 'E', 'S', 'T']
 
-    def ui_move(self, direction):
-        """
-        method used for moving on graphical mode
-        """
-        if direction == 'right':
-            if self.sprite_x < (self.constant['sprite_number'] - 1):
-                if self.level.structure[
-                    self.sprite_y][
-                    self.sprite_x + 1]\
-                        != 'm':
-                    self.sprite_x += 1
-                    self.x = self.sprite_x * self.constant['sprite_size']
-        elif direction == 'left':
-            if self.sprite_x > 0:
-                if self.level.structure[
-                    self.sprite_y][
-                    self.sprite_x - 1]\
-                        != 'm':
-                    self.sprite_x -= 1
-                    self.x = self.sprite_x * self.constant['sprite_size']
-        elif direction == 'up':
-            if self.sprite_y > 0:
-                if self.level.structure[
-                    self.sprite_y - 1][
-                    self.sprite_x] \
-                        != 'm':
-                    self.sprite_y -= 1
-                    self.y = self.sprite_y * self.constant['sprite_size']
-        elif direction == 'down':
-            if self.sprite_y < (self.constant['sprite_number'] - 1):
-                if self.level.structure[
-                    self.sprite_y + 1][
-                    self.sprite_x] \
-                        != 'm':
-                    self.sprite_y += 1
-                    self.y = self.sprite_y * self.constant['sprite_size']
-
-    def console_move(self, x_before, y_before, x_new, y_new, level, hero):
+    def move(self, x_before, y_before, x_new, y_new, level, icon):
         """
         method used for moving on console mode
         """
@@ -63,14 +23,30 @@ class Character(Constant):
             if level.structure[x_new][y_new] in self.item:
                 self.item_count += 1
             level.structure[x_before][y_before] = '0'
-            level.structure[x_new][y_new] = hero
+            level.structure[x_new][y_new] = icon
             return True
         else:
             return False
 
-    def delete_item(self):
-        """
-        method used for items pick up logic
-        """
-        self.level.structure[self.sprite_y][self.sprite_x] = '0'
-        self.inventory += 1
+    def has_win(self, mode, *window):
+        if mode == 'ui' and window[0]:
+            font = pygame.font.SysFont('Comic Sans MS', 30)
+            window[0].fill('white')
+            text = font.render('Victory !', False, (50, 205, 50))
+            window[0].blit(text, (170, 190))
+            pygame.display.flip()
+            time.sleep(3)
+        elif mode == 'console':
+            print('You win... but what did you expect? '
+                  'you\'re Macgyver !')
+
+    def has_lose(self, mode, *window):
+        if mode == 'ui' and window[0]:
+            window[0].fill('white')
+            font = pygame.font.SysFont('Comic Sans MS', 30)
+            text = font.render('You\'re dead...', False, (178, 34, 34))
+            window[0].blit(text, (140, 190))
+            pygame.display.flip()
+            time.sleep(3)
+        elif mode == 'console':
+            print('You\'re dead !!')

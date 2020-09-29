@@ -1,5 +1,5 @@
-d00mmmmm0m00mmm
-0m00000m0mm0m00
+X00mmmmm0m00mmm
+0m00000m0mm0m0m
 00mm0m000m0000m
 m000mmmm000mmmm
 000m00000mmm00m
@@ -10,6 +10,6 @@ mm0mmmm0mm000mm
 mmm00mmmm0mmmmm
 mmm0mm0m00mm00m
 m000000m0mm00mm
-000m00m00000mmm
-mmmm00mm0mm0mmm
-m0000mmm00m00ba
+mmm00m000000mmm
+000000mmmm000ba
+mmmmmmmmmmmmmmm

@@ -9,8 +9,7 @@
   "wall_picture": "ressource/wall.png",
   "floor_picture": "ressource/floor.png",
   "flag_picture": "ressource/flag.png",
-  "level_txt": "ressource/level.txt",
-  "level_txt_console": "ressource/level_console.txt",
+  "level": "ressource/level.txt",
 
   "needle_picture": "ressource/aiguille.png",
   "ether_picture": "ressource/ether.png",

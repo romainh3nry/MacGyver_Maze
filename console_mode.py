@@ -1,4 +1,4 @@
-from console_level import ConsoleLevel
+from level import Level
 from character import Character, Constant
 
 
@@ -8,7 +8,7 @@ class ConsoleMode(Constant):
     """
     def __init__(self):
         Constant.__init__(self)
-        self.level = ConsoleLevel(self.constant['level_txt_console'])
+        self.level = Level(self.constant['level'])
         self.player = Character(self.constant['player'], self.level)
 
     def play(self):
@@ -25,31 +25,30 @@ class ConsoleMode(Constant):
                 print("".join(elt))
             direction = input('Choose a direction: ')
             if direction == 'd':
-                if self.player.console_move(
+                if self.player.move(
                         x_hero, y_hero, x_hero, y_hero + 1,
                         self.level, self.constant['player']):
                     y_hero += 1
             elif direction == 'q':
-                if self.player.console_move(
+                if self.player.move(
                         x_hero, y_hero, x_hero, y_hero - 1,
                         self.level, self.constant['player']):
                     y_hero -= 1
             elif direction == 's':
-                if self.player.console_move(
+                if self.player.move(
                         x_hero, y_hero, x_hero + 1, y_hero,
                         self.level, self.constant['player']):
                     x_hero += 1
             elif direction == 'z':
-                if self.player.console_move(
+                if self.player.move(
                         x_hero, y_hero, x_hero - 1, y_hero,
                         self.level, self.constant['player']):
                     x_hero -= 1
 
             if self.level.structure[x_hero][y_hero + 1] == 'b':
                 if self.player.item_count < 4:
+                    self.player.has_lose(mode='console')
                     progress = False
-                    print('You\'re dead !!')
                 else:
+                    self.player.has_win(mode='console')
                     progress = False
-                    print('You win... but what did you expect? '
-                          'you\'re Macgyver !')
