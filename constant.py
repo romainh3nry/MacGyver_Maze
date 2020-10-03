@@ -5,10 +5,9 @@ class Constant:
     """
     class used to load constants
     """
-    def __init__(self):
-        self.constant = self.load_constant()
+    constant = None
 
     @staticmethod
     def load_constant():
         with open('constant.json') as file:
-            return json.load(file)
+            Constant.constant = json.load(file)

@@ -1,9 +1,11 @@
 from console_mode import ConsoleMode
 from graphic_mode import GraphicMode
+from constant import Constant
 
 
 class MainClass:
     def __init__(self):
+        Constant.load_constant()
         self.mode_choice = self.playing_mode()
         if self.mode_choice == 1:
             GraphicMode().play()

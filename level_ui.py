@@ -1,5 +1,6 @@
 from level import Level
 import pygame
+from constant import Constant
 
 
 class GraphicLevel(Level):
@@ -19,21 +20,21 @@ class GraphicLevel(Level):
         """
         maze displaying items and bad guy
         """
-        macgyver = self.resize_set(self.constant['macgyver'])
-        wall = self.resize_set(self.constant['wall_picture'])
-        floor = self.resize_set(self.constant['floor_picture'])
-        flag = self.resize_set(self.constant['flag_picture'])
-        bad_guy = self.resize_set(self.constant['bad_guy_picture'])
-        needle = self.resize_set(self.constant['needle_picture'])
-        ether = self.resize_set(self.constant['ether_picture'])
-        syringe = self.resize_set(self.constant['syringe_picture'])
-        tube = self.resize_set(self.constant['tube_picture'])
+        macgyver = self.resize_set(Constant.constant['macgyver'])
+        wall = self.resize_set(Constant.constant['wall_picture'])
+        floor = self.resize_set(Constant.constant['floor_picture'])
+        flag = self.resize_set(Constant.constant['flag_picture'])
+        bad_guy = self.resize_set(Constant.constant['bad_guy_picture'])
+        needle = self.resize_set(Constant.constant['needle_picture'])
+        ether = self.resize_set(Constant.constant['ether_picture'])
+        syringe = self.resize_set(Constant.constant['syringe_picture'])
+        tube = self.resize_set(Constant.constant['tube_picture'])
         line_number = 0
         for line in self.structure:
             sprite_number = 0
             for sprite in line:
-                x = sprite_number * self.constant['sprite_size']
-                y = line_number * self.constant['sprite_size']
+                x = sprite_number * Constant.constant['sprite_size']
+                y = line_number * Constant.constant['sprite_size']
                 if sprite == 'm':
                     window.blit(wall, (x, y))
                 elif sprite == 'X':

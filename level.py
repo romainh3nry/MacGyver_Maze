@@ -1,10 +1,8 @@
 import random
-from constant import Constant
 
 
-class Level(Constant):
+class Level:
     def __init__(self, file):
-        Constant.__init__(self)
         self.file = file
         self.structure = []
         self.inventory = 0
@@ -45,3 +43,9 @@ class Level(Constant):
                     level_structure[item_y][item_x] = 'T'
                 self.inventory += 1
         self.structure = level_structure
+
+    def is_final_boss(self, x, y):
+        """
+        check if the player is in front of the boss
+        """
+        return self.structure[x][y] == 'b'
