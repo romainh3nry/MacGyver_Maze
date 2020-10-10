@@ -28,30 +28,6 @@ class GraphicMode:
         self.window = pygame.display.set_mode(
             (self.window_side, self.window_side))
 
-    def check_victory(self, x_hero, y_hero):
-        """
-        this method will check, at every moves,
-        if the player is in front of the boss and
-        if he has all requirement to win or not
-        """
-        if self.level.is_final_boss(x_hero, y_hero):
-            if self.player.has_all_items():
-                font = pygame.font.SysFont('Comic Sans MS', 30)
-                self.window.fill('white')
-                text = font.render('Victory !', False, (50, 205, 50))
-                self.window.blit(text, (170, 190))
-                pygame.display.flip()
-                time.sleep(3)
-                exit()
-            else:
-                self.window.fill('white')
-                font = pygame.font.SysFont('Comic Sans MS', 30)
-                text = font.render('You\'re dead...', False, (178, 34, 34))
-                self.window.blit(text, (140, 190))
-                pygame.display.flip()
-                time.sleep(3)
-                exit()
-
     def play(self):
         """
         method used to launch graphical game
@@ -81,29 +57,61 @@ class GraphicMode:
                     elif event.key == K_RIGHT:
                         self.check_victory(x_hero, y_hero + 1)
                         if self.player.move(
-                                x_hero, y_hero, x_hero, y_hero + 1,
-                                self.level, Constant.constant['player']):
+                                x_hero, y_hero, self.level, 'right'):
                             y_hero += 1
                     elif event.key == K_LEFT:
                         self.check_victory(x_hero, y_hero - 1)
                         if self.player.move(
-                                x_hero, y_hero, x_hero, y_hero - 1,
-                                self.level, Constant.constant['player']):
+                                x_hero, y_hero, self.level, 'left'):
                             y_hero -= 1
                     elif event.key == K_UP:
                         self.check_victory(x_hero - 1, y_hero)
                         if self.player.move(
-                                x_hero, y_hero, x_hero - 1, y_hero,
-                                self.level, Constant.constant['player']):
+                                x_hero, y_hero, self.level, 'up'):
                             x_hero -= 1
                     elif event.key == K_DOWN:
                         self.check_victory(x_hero + 1, y_hero)
                         if self.player.move(
-                                x_hero, y_hero, x_hero + 1, y_hero,
-                                self.level, Constant.constant['player']):
+                                x_hero, y_hero, self.level, 'down'):
                             x_hero += 1
 
             self.window.blit(background, (0, 0))
             self.level.display(self.window)
             self.window.blit(item_collected, (300, 0))
             pygame.display.flip()
+
+    def check_victory(self, x_hero, y_hero):
+        """
+        this method will check, at every moves,
+        if the player is in front of the boss and
+        if he has all requirement to win or not
+        """
+        if self.level.is_final_boss(x_hero, y_hero):
+            if self.player.has_all_items():
+                self.display_victory()
+            else:
+                self.display_defeat()
+
+    def display_victory(self):
+        """
+        Victory screen
+        """
+        font = pygame.font.SysFont('Comic Sans MS', 30)
+        self.window.fill('white')
+        text = font.render('Victory !', False, (50, 205, 50))
+        self.window.blit(text, (170, 190))
+        pygame.display.flip()
+        time.sleep(3)
+        exit()
+
+    def display_defeat(self):
+        """
+        Defeat screen
+        """
+        self.window.fill('white')
+        font = pygame.font.SysFont('Comic Sans MS', 30)
+        text = font.render('You\'re dead...', False, (178, 34, 34))
+        self.window.blit(text, (140, 190))
+        pygame.display.flip()
+        time.sleep(3)
+        exit()

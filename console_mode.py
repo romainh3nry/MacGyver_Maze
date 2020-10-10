@@ -12,21 +12,6 @@ class ConsoleMode(Constant):
         self.level = Level(Constant.constant['level'])
         self.player = Character(Constant.constant['player'], self.level)
 
-    def check_victory(self, x_hero, y_hero):
-        """
-        this method will check, at every moves,
-        if the player is in front of the boss and
-        if he has all requirement to win or not
-        """
-        if self.level.is_final_boss(x_hero, y_hero):
-            if self.player.has_all_items():
-                print('You win... but what did you expect? '
-                      'you\'re Macgyver !')
-                exit()
-            else:
-                print('You\'re dead !!')
-                exit()
-
     def play(self):
         """
         method used to launch console game
@@ -42,32 +27,32 @@ class ConsoleMode(Constant):
             direction = input('Choose a direction: ')
             if direction == 'd':
                 self.check_victory(x_hero, y_hero + 1)
-                if self.player.move(
-                        x_hero, y_hero, x_hero, y_hero + 1,
-                        self.level, Constant.constant['player']):
+                if self.player.move(x_hero, y_hero, self.level, 'right'):
                     y_hero += 1
             elif direction == 'q':
                 self.check_victory(x_hero, y_hero - 1)
-                if self.player.move(
-                        x_hero, y_hero, x_hero, y_hero - 1,
-                        self.level, Constant.constant['player']):
+                if self.player.move(x_hero, y_hero, self.level, 'left'):
                     y_hero -= 1
             elif direction == 's':
                 self.check_victory(x_hero + 1, y_hero)
-                if self.player.move(
-                        x_hero, y_hero, x_hero + 1, y_hero,
-                        self.level, Constant.constant['player']):
+                if self.player.move(x_hero, y_hero, self.level, 'down'):
                     x_hero += 1
             elif direction == 'z':
                 self.check_victory(x_hero - 1, y_hero)
-                if self.player.move(
-                        x_hero, y_hero, x_hero - 1, y_hero,
-                        self.level, Constant.constant['player']):
+                if self.player.move(x_hero, y_hero, self.level, 'up'):
                     x_hero -= 1
 
-            if self.level.is_final_boss(x_hero, y_hero):
-                if self.player.has_all_items():
-                    print('You win... but what did you expect? '
-                          'you\'re Macgyver !')
-                else:
-                    print('You\'re dead !!')
+    def check_victory(self, x_hero, y_hero):
+        """
+        this method will check, at every moves,
+        if the player is in front of the boss and
+        if he has all requirement to win or not
+        """
+        if self.level.is_final_boss(x_hero, y_hero):
+            if self.player.has_all_items():
+                print('You win... but what did you expect? '
+                      'you\'re Macgyver !')
+                exit()
+            else:
+                print('You\'re dead !!')
+                exit()
