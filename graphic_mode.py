@@ -1,4 +1,4 @@
-from level_ui import GraphicLevel
+from graphic_level import GraphicLevel
 from character import Character
 from constant import Constant
 import pygame
