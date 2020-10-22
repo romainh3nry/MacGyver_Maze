@@ -27,19 +27,19 @@ class ConsoleMode(Constant):
             direction = input('Choose a direction: ')
             if direction == 'd':
                 self.check_victory(x_hero, y_hero + 1)
-                if self.player.move(x_hero, y_hero, x_hero, y_hero + 1):
+                if self.player.move(x_hero, y_hero, 'right'):
                     y_hero += 1
             elif direction == 'q':
                 self.check_victory(x_hero, y_hero - 1)
-                if self.player.move(x_hero, y_hero, x_hero, y_hero - 1):
+                if self.player.move(x_hero, y_hero, 'left'):
                     y_hero -= 1
             elif direction == 's':
                 self.check_victory(x_hero + 1, y_hero)
-                if self.player.move(x_hero, y_hero, x_hero + 1, y_hero):
+                if self.player.move(x_hero, y_hero, 'down'):
                     x_hero += 1
             elif direction == 'z':
                 self.check_victory(x_hero - 1, y_hero)
-                if self.player.move(x_hero, y_hero, x_hero - 1, y_hero):
+                if self.player.move(x_hero, y_hero, 'up'):
                     x_hero -= 1
 
     def check_victory(self, x_hero, y_hero):
