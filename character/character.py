@@ -1,4 +1,4 @@
-from constant import Constant
+from constant.constant import Constant
 
 
 class Character:

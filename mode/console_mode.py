@@ -1,6 +1,6 @@
-from character import Character
-from constant import Constant
-from level import Level
+from character.character import Character
+from constant.constant import Constant
+from level.level import Level
 
 
 class ConsoleMode(Constant):

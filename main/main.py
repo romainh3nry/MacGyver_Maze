@@ -1,8 +1,8 @@
 import logging
 
-from console_mode import ConsoleMode
-from constant import Constant
-from graphic_mode import GraphicMode
+from mode.console_mode import ConsoleMode
+from constant.constant import Constant
+from mode.graphic_mode import GraphicMode
 
 
 class MainClass:

@@ -1,7 +1,7 @@
 import pygame
 
-from constant import Constant
-from level import Level
+from constant.constant import Constant
+from level.level import Level
 
 
 class GraphicLevel(Level):

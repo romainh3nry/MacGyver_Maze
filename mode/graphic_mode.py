@@ -4,9 +4,9 @@ import pygame
 from pygame.locals import (K_DOWN, K_ESCAPE, K_LEFT, K_RIGHT, K_UP, KEYDOWN,
                            QUIT)
 
-from character import Character
-from constant import Constant
-from graphic_level import GraphicLevel
+from character.character import Character
+from constant.constant import Constant
+from level.graphic_level import GraphicLevel
 
 
 class GraphicMode:
