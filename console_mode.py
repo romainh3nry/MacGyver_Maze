@@ -1,6 +1,6 @@
-from level import Level
 from character import Character
 from constant import Constant
+from level import Level
 
 
 class ConsoleMode(Constant):
@@ -21,25 +21,25 @@ class ConsoleMode(Constant):
         x_hero, y_hero = self.level.position(
             self.level.structure, Constant.constant['player'])
         while progress:
-            print('Item : {}'.format(self.player.item_count))
+            print('Item : {}'.format(self.player.get_item_count()))
             for elt in self.level.structure:
                 print("".join(elt))
             direction = input('Choose a direction: ')
             if direction == 'd':
                 self.check_victory(x_hero, y_hero + 1)
-                if self.player.move(x_hero, y_hero, self.level, 'right'):
+                if self.player.move(x_hero, y_hero, x_hero, y_hero + 1):
                     y_hero += 1
             elif direction == 'q':
                 self.check_victory(x_hero, y_hero - 1)
-                if self.player.move(x_hero, y_hero, self.level, 'left'):
+                if self.player.move(x_hero, y_hero, x_hero, y_hero - 1):
                     y_hero -= 1
             elif direction == 's':
                 self.check_victory(x_hero + 1, y_hero)
-                if self.player.move(x_hero, y_hero, self.level, 'down'):
+                if self.player.move(x_hero, y_hero, x_hero + 1, y_hero):
                     x_hero += 1
             elif direction == 'z':
                 self.check_victory(x_hero - 1, y_hero)
-                if self.player.move(x_hero, y_hero, self.level, 'up'):
+                if self.player.move(x_hero, y_hero, x_hero - 1, y_hero):
                     x_hero -= 1
 
     def check_victory(self, x_hero, y_hero):

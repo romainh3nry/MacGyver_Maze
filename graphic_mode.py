@@ -1,16 +1,12 @@
-from graphic_level import GraphicLevel
+import time
+
+import pygame
+from pygame.locals import (K_DOWN, K_ESCAPE, K_LEFT, K_RIGHT, K_UP, KEYDOWN,
+                           QUIT)
+
 from character import Character
 from constant import Constant
-import pygame
-from pygame.locals import \
-    QUIT, \
-    KEYDOWN, \
-    K_ESCAPE, \
-    K_RIGHT, \
-    K_LEFT, \
-    K_UP, \
-    K_DOWN
-import time
+from graphic_level import GraphicLevel
 
 
 class GraphicMode:
@@ -46,7 +42,7 @@ class GraphicMode:
             font = pygame.font.SysFont('Comic Sans MS', 30)
             item_collected = font.render(
                 'Items : {}'.format(
-                    self.player.item_count), False, (255, 255, 255))
+                    self.player.get_item_count()), False, (255, 255, 255))
 
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -56,23 +52,19 @@ class GraphicMode:
                         progress = False
                     elif event.key == K_RIGHT:
                         self.check_victory(x_hero, y_hero + 1)
-                        if self.player.move(
-                                x_hero, y_hero, self.level, 'right'):
+                        if self.player.move(x_hero, y_hero, 'right'):
                             y_hero += 1
                     elif event.key == K_LEFT:
                         self.check_victory(x_hero, y_hero - 1)
-                        if self.player.move(
-                                x_hero, y_hero, self.level, 'left'):
+                        if self.player.move(x_hero, y_hero, 'left'):
                             y_hero -= 1
                     elif event.key == K_UP:
                         self.check_victory(x_hero - 1, y_hero)
-                        if self.player.move(
-                                x_hero, y_hero, self.level, 'up'):
+                        if self.player.move(x_hero, y_hero, 'up'):
                             x_hero -= 1
                     elif event.key == K_DOWN:
                         self.check_victory(x_hero + 1, y_hero)
-                        if self.player.move(
-                                x_hero, y_hero, self.level, 'down'):
+                        if self.player.move(x_hero, y_hero, 'down'):
                             x_hero += 1
 
             self.window.blit(background, (0, 0))

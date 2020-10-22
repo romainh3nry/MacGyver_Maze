@@ -12,49 +12,36 @@ class Character:
         self.item_count = 0
         self.item = ['N', 'E', 'S', 'T']
 
-    def move(self, x, y, level, direction):
-        """
-        method used for moving
-        """
+    def move(self, x, y, direction):
         if direction == 'right':
-            if level.structure[x][y + 1] != 'm':
-                if level.structure[x][y + 1] in self.item:
-                    self.item_count += 1
-                level.structure[x][y] = '0'
-                level.structure[x][y + 1] = Constant.constant['player']
+            if self.is_moving_to(x, y, x, y + 1):
                 return True
-            else:
-                return False
         elif direction == 'left':
-            if level.structure[x][y - 1] != 'm':
-                if level.structure[x][y - 1] in self.item:
-                    self.item_count += 1
-                level.structure[x][y] = '0'
-                level.structure[x][y - 1] = Constant.constant['player']
+            if self.is_moving_to(x, y, x, y - 1):
                 return True
-            else:
-                return False
         elif direction == 'up':
-            if level.structure[x - 1][y] != 'm':
-                if level.structure[x - 1][y] in self.item:
-                    self.item_count += 1
-                level.structure[x][y] = '0'
-                level.structure[x - 1][y] = Constant.constant['player']
+            if self.is_moving_to(x, y, x - 1, y):
                 return True
-            else:
-                return False
         elif direction == 'down':
-            if level.structure[x + 1][y] != 'm':
-                if level.structure[x + 1][y] in self.item:
-                    self.item_count += 1
-                level.structure[x][y] = '0'
-                level.structure[x + 1][y] = Constant.constant['player']
+            if self.is_moving_to(x, y, x + 1, y):
                 return True
-            else:
-                return False
 
     def has_all_items(self):
         """
         check in the player has all the required items
         """
         return self.item_count == 4
+
+    def get_item_count(self):
+        return self.item_count
+
+    def is_moving_to(self, x_before, y_before, x_new, y_new):
+        if self.level.is_not_wall(x_new, y_new):
+            if self.level.maze_structure()[x_new][y_new] in self.item:
+                self.item_count += 1
+            self.level.maze_structure()[x_before][y_before] = '0'
+            self.level.maze_structure()[x_new][y_new] = (
+                Constant.constant['player'])
+            return True
+        else:
+            return False

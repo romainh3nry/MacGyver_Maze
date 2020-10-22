@@ -30,8 +30,8 @@ class Level:
                         line_level.append(sprite)
                 level_structure.append(line_level)
         while self.inventory < 4:
-            item_x = random.randint(0, 14)
-            item_y = random.randint(0, 14)
+            item_x = random.randint(0, len(line_level) - 1)
+            item_y = random.randint(0, len(line_level) - 1)
             if level_structure[item_y][item_x] == '0':
                 if self.inventory == 0:
                     level_structure[item_y][item_x] = 'N'
@@ -49,3 +49,12 @@ class Level:
         check if the player is in front of the boss
         """
         return self.structure[x][y] == 'b'
+
+    def is_not_wall(self, x, y):
+        if self.structure[x][y] != 'm':
+            return True
+        else:
+            return False
+
+    def maze_structure(self):
+        return self.structure
