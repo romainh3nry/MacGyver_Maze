@@ -5,6 +5,9 @@ from level.level import Level
 
 
 class GraphicLevel(Level):
+    """
+    class used to diplay the maze in pygame
+    """
     def __init__(self, file):
         Level.__init__(self, file)
         self.file = file

@@ -13,6 +13,9 @@ class Character:
         self.item = ['N', 'E', 'S', 'T']
 
     def move(self, x, y, direction):
+        """
+        method to make the hero move
+        """
         if direction == 'right':
             if self.is_moving_to(x, y, x, y + 1):
                 return True
@@ -33,9 +36,15 @@ class Character:
         return self.item_count == 4
 
     def get_item_count(self):
+        """
+        get item count
+        """
         return self.item_count
 
     def is_moving_to(self, x_before, y_before, x_new, y_new):
+        """
+        method used to move the hero is a direction
+        """
         if self.level.is_not_wall(x_new, y_new):
             if self.level.maze_structure()[x_new][y_new] in self.item:
                 self.item_count += 1

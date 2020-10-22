@@ -6,6 +6,9 @@ from mode.graphic_mode import GraphicMode
 
 
 class MainClass:
+    """
+    class used to choose the mode the player want to play
+    """
     def __init__(self):
         Constant.load_constant()
         self.mode_choice = self.playing_mode()

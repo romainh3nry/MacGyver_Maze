@@ -2,6 +2,9 @@ import random
 
 
 class Level:
+    """
+    class used to generate maze, find player position
+    """
     def __init__(self, file):
         self.file = file
         self.structure = []
@@ -51,10 +54,16 @@ class Level:
         return self.structure[x][y] == 'b'
 
     def is_not_wall(self, x, y):
+        """
+        check if the next position is not a wall
+        """
         if self.structure[x][y] != 'm':
             return True
         else:
             return False
 
     def maze_structure(self):
+        """
+        get maze structure
+        """
         return self.structure
