@@ -22,5 +22,5 @@ Le jeu utilise python 3 et le module pygame
 
 - git clone https://github.com/MagicRom06/MacGyver_Maze
 - Pour activer l'environnement virtuel une fois dans le repertoire, executer la commande pipenv shell
-- exécuter la commande "pip install -r requirements.txt"
+- exécuter la commande "pipenv update"
 - exécuter python start.py
